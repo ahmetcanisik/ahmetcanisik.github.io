@@ -1,13 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ahmetcanisik.github.io</title>
+    <style>
+        * {
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: xx-large;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: content-box linear-gradient(to right, #222, darkblue);
+            color: white;
+        }
+
+        #yourName {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 100%;
+            min-height: 100vh;
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        #yourName::placeholder {
+            color: rgb(194, 225, 255);
+        }
+
+        .fill-screen {
+            min-width: 100%;
+            min-height: 100%;
+            outline: none;
+            border: none;
+        }
+
+        .hide {
+            visibility: hidden;
+            opacity: 0;
+            display: none;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .placeholder-text {
+            position: absolute;
+            min-width: 100%;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            opacity: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @media (min-width: 768px) {
+            *:not(button) {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <a href="/stopwatch">stopwatch</a>
-    <a href="/fvmodal">fvmodal</a>
-    <a href="https://fvuar.js.org">fvuarjs</a>
+    <script>
+        document.addEventListener("DOMContentLoaded", (e) => {
+            const name = document.createElement("input");
+            name.id = "yourName";
+            name.tabIndex = 1;
+            name.placeholder = "What's your name?..";
+            document.body.appendChild(name);
+
+            name.focus();
+
+            name.addEventListener("input", (e) => {
+                if (!name.value.startsWith("my name is ")) {
+                    name.value = "";
+                    name.value = "my name is " + e.target.value;
+                }
+            });
+
+            name.addEventListener("keypress", (e) => {
+                if (e.keyCode === 13) {
+                    if (e.target.value) {
+                        document.body.innerHTML = "";
+
+                        const content = document.createElement("div");
+                        const title = document.createElement("h1");
+                        const description = document.createElement("p");
+
+                        content.classList.add("content");
+
+                        title.innerHTML = `# Hi ${e.target.value.replace("my name is ", "")}, Welcome to CANISIK.me`;
+                        description.innerHTML = "This website is still under {development}...\nPlease inspect <a href='https://ahmetcanisik.com'>my personal website.</a>";
+
+                        document.body.appendChild(content);
+                        content.appendChild(title);
+                        content.appendChild(description);
+                    }
+                }
+            })
+        });
+    </script>
 </body>
+
 </html>
