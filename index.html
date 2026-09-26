@@ -1,121 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ahmetcanisik.github.io</title>
-    <style>
-        * {
-            top: 0;
-            left: 0;
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            font-size: xx-large;
-            word-wrap: break-word;
-            word-break: break-all;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KPSS Çalışma Siteleri</title>
+<meta name="description" content="KPSS Coğrafya, Tarih ve Güncel Bilgiler için ücretsiz, etkileşimli çalışma siteleri: haritalar, çıkmış sorular, tahmini sorular ve analizler.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f6f5c'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='15' font-weight='800' text-anchor='middle' fill='white'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --text: #1b1d1f;
+    --muted: #5d6166;
+    --line: #e2ded5;
+    --shadow: 0 1px 2px rgba(20,20,20,.06), 0 8px 24px rgba(20,20,20,.07);
+    --shadow-hover: 0 2px 4px rgba(20,20,20,.08), 0 22px 44px rgba(20,20,20,.14);
 
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: content-box linear-gradient(to right, #222, darkblue);
-            color: white;
-        }
+    --geo: #1f6f5c;  --geo-soft: #e2f1ec;
+    --tar: #b4532a;  --tar-soft: #f8e8df;
+    --gun: #4b4bb3;  --gun-soft: #e7e7f8;
 
-        #yourName {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-width: 100%;
-            min-height: 100vh;
-            background-color: dodgerblue;
-            color: white;
-        }
+    --display: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121416;
+      --surface: #1b1e21;
+      --text: #eceae4;
+      --muted: #a2a6ab;
+      --line: #2c3035;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+      --shadow-hover: 0 2px 4px rgba(0,0,0,.5), 0 22px 44px rgba(0,0,0,.5);
+      --geo: #5cc3a6;  --geo-soft: #173029;
+      --tar: #ec8a5c;  --tar-soft: #37231a;
+      --gun: #9a9bf0;  --gun-soft: #24254a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121416;
+    --surface: #1b1e21;
+    --text: #eceae4;
+    --muted: #a2a6ab;
+    --line: #2c3035;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+    --shadow-hover: 0 2px 4px rgba(0,0,0,.5), 0 22px 44px rgba(0,0,0,.5);
+    --geo: #5cc3a6;  --geo-soft: #173029;
+    --tar: #ec8a5c;  --tar-soft: #37231a;
+    --gun: #9a9bf0;  --gun-soft: #24254a;
+  }
 
-        #yourName::placeholder {
-            color: rgb(194, 225, 255);
-        }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-        .fill-screen {
-            min-width: 100%;
-            min-height: 100%;
-            outline: none;
-            border: none;
-        }
+  .wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
 
-        .hide {
-            visibility: hidden;
-            opacity: 0;
-            display: none;
-        }
+  header { padding: 56px 0 36px; }
+  @media (min-width: 720px) { header { padding: 88px 0 52px; } }
+  .eyebrow {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(40px, 7vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -.02em;
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+  .lead {
+    font-size: clamp(17px, 2vw, 20px);
+    color: var(--muted);
+    max-width: 640px;
+    margin: 0;
+  }
 
-        .content {
-            display: flex;
-            flex-direction: column;
-        }
+  main { flex: 1; padding-bottom: 56px; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 980px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
 
-        .placeholder-text {
-            position: absolute;
-            min-width: 100%;
-            text-align: center;
-            top: 50%;
-            left: 50%;
-            opacity: 50%;
-            transform: translate(-50%, -50%);
-        }
+  .card {
+    --c: var(--geo);
+    --c-soft: var(--geo-soft);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    padding: 28px;
+    border-radius: 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    color: inherit;
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  @media (min-width: 720px) { .card { padding: 34px; min-height: 420px; } }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 8px;
+    background: var(--c);
+  }
+  .card.tar { --c: var(--tar); --c-soft: var(--tar-soft); }
+  .card.gun { --c: var(--gun); --c-soft: var(--gun-soft); }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--c); }
+  .card:active { transform: translateY(-1px); }
+  .card:focus-visible { outline: 4px solid var(--c); outline-offset: 4px; }
 
-        @media (min-width: 768px) {
-            *:not(button) {
-                font-size: 2rem;
-            }
-        }
-    </style>
+  .icon {
+    width: 76px; height: 76px;
+    border-radius: 20px;
+    background: var(--c-soft);
+    color: var(--c);
+    display: grid;
+    place-items: center;
+    margin-bottom: 22px;
+    flex-shrink: 0;
+  }
+  .icon svg { width: 44px; height: 44px; }
+
+  .card h2 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(30px, 4vw, 38px);
+    line-height: 1.05;
+    letter-spacing: -.015em;
+    margin: 0 0 10px;
+  }
+  .card p { margin: 0 0 18px; color: var(--muted); }
+  .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 26px;
+    display: grid;
+    gap: 8px;
+    font-size: 15.5px;
+  }
+  .card li { display: flex; gap: 10px; align-items: baseline; }
+  .card li::before {
+    content: "";
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--c);
+    flex-shrink: 0;
+    transform: translateY(-2px);
+  }
+  .card li b { font-weight: 600; color: var(--text); }
+
+  .go {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 22px;
+    border-radius: 16px;
+    background: var(--c);
+    color: var(--surface);
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 21px;
+  }
+  .go svg { width: 26px; height: 26px; transition: transform .18s ease; }
+  .card:hover .go svg { transform: translateX(5px); }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0 36px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; }
+  footer a { color: inherit; text-underline-offset: 3px; }
+  footer a:hover { color: var(--text); }
+  footer nav { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card, .go svg { transition: none; }
+    .card:hover { transform: none; }
+  }
+</style>
 </head>
-
 <body>
-    <script>
-        document.addEventListener("DOMContentLoaded", (e) => {
-            const name = document.createElement("input");
-            name.id = "yourName";
-            name.tabIndex = 1;
-            name.placeholder = "What's your name?..";
-            document.body.appendChild(name);
 
-            name.focus();
+<header>
+  <div class="wrap">
+    <span class="eyebrow">Ahmet Can Işık · Ücretsiz çalışma araçları</span>
+    <h1>KPSS Çalışma Siteleri</h1>
+    <p class="lead">Haritalarla, çıkmış sorularla ve analizlerle KPSS Genel Kültür'e çalış. Hepsi tarayıcıda çalışır, üyelik gerektirmez.</p>
+  </div>
+</header>
 
-            name.addEventListener("input", (e) => {
-                if (!name.value.startsWith("my name is ")) {
-                    name.value = "";
-                    name.value = "my name is " + e.target.value;
-                }
-            });
+<main>
+  <div class="wrap grid">
 
-            name.addEventListener("keypress", (e) => {
-                if (e.keyCode === 13) {
-                    if (e.target.value) {
-                        document.body.innerHTML = "";
+    <a class="card geo" href="/kpss-cografya-harita/">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5z"/><path d="M9 4v13.5M15 6.5V20"/>
+        </svg>
+      </div>
+      <h2>Coğrafya Haritası</h2>
+      <p>Türkiye'nin yer şekilleri, suları, toprakları ve deprem bölgeleri tek bir etkileşimli haritada.</p>
+      <ul>
+        <li><span><b>Katmanlar:</b> dağlar, ovalar, platolar, nehirler, göller, barajlar, 81 il</span></li>
+        <li><span><b>Keşif Modu:</b> haritaya tıklayarak kendini test et</span></li>
+        <li><span><b>Çıkmış sorular</b> haritada işaretli alanlarıyla</span></li>
+      </ul>
+      <span class="go">Haritayı aç
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </a>
 
-                        const content = document.createElement("div");
-                        const title = document.createElement("h1");
-                        const description = document.createElement("p");
+    <a class="card tar" href="/kpss-tarih/">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/>
+        </svg>
+      </div>
+      <h2>Tarih Haritası</h2>
+      <p>Olaylar kronolojik sırayla haritada: yeri, tarafları, sonucu ve aynı anda başka yerde neler olduğu.</p>
+      <ul>
+        <li><span><b>257 olay</b> haritada, "Bu sırada" eş zamanlı olaylarla</span></li>
+        <li><span><b>610 çıkmış soru</b> · Lisans, Ön Lisans, Ortaöğretim</span></li>
+        <li><span><b>314 terimlik sözlük</b>, sıralama listeleri, analiz</span></li>
+      </ul>
+      <span class="go">Tarihe başla
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </a>
 
-                        content.classList.add("content");
+    <a class="card gun" href="/kpss-guncel-bilgiler/">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 5h13v14H6a2 2 0 0 1-2-2z"/><path d="M17 9h3v8a2 2 0 0 1-2 2h-1"/><path d="M7.5 9h6M7.5 12.5h6M7.5 16h4"/>
+        </svg>
+      </div>
+      <h2>Güncel Bilgiler</h2>
+      <p>Son yılların çıkmış sorularının analizine dayanan, kaynakları doğrulanmış tahmini sorular.</p>
+      <ul>
+        <li><span><b>109 tahmini soru</b> · KPSS 2026 için</span></li>
+        <li><span><b>89 çıkmış soru</b> · 2011–2026</span></li>
+        <li><span><b>Konu notları</b>, analiz ve KPSS neti hesabı</span></li>
+      </ul>
+      <span class="go">Soruları çöz
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </a>
 
-                        title.innerHTML = `# Hi ${e.target.value.replace("my name is ", "")}, Welcome to CANISIK.me`;
-                        description.innerHTML = "This website is still under {development}...\nPlease inspect <a href='https://ahmetcanisik.com'>my personal website.</a>";
+  </div>
+</main>
 
-                        document.body.appendChild(content);
-                        content.appendChild(title);
-                        content.appendChild(description);
-                    }
-                }
-            })
-        });
-    </script>
+<footer>
+  <div class="wrap">
+    <span>Kaynak kodu GitHub'da:</span>
+    <nav>
+      <a href="https://github.com/ahmetcanisik/kpss-cografya-harita">kpss-cografya-harita</a>
+      <a href="https://github.com/ahmetcanisik/kpss-tarih">kpss-tarih</a>
+      <a href="https://github.com/ahmetcanisik/kpss-guncel-bilgiler">kpss-guncel-bilgiler</a>
+      <a href="https://ahmetcanisik.com">ahmetcanisik.com</a>
+    </nav>
+  </div>
+</footer>
+
 </body>
-
 </html>
